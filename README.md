@@ -1,4 +1,4 @@
-# adf4351
+# adf4351 python2.7 control
 
 A Python library for the **Analog Devices ADF4351** wideband frequency synthesizer,
 targeting **Python 2.7** (and working unchanged on Python 3).

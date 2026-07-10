@@ -194,18 +194,22 @@ python test_connection.py
 sudo python test_connection.py     # if USB access is denied
 ```
 
-### `test_freq.py`
+### `test_frequency.py`
 
-Computes a frequency plan, prints a full breakdown including the *actual* synthesized
-frequency and its error, writes the registers, and polls MUXOUT for lock.
+Computes a frequency plan with the library's planner, prints a full breakdown
+including the *actual* synthesized frequency and its error, writes the registers,
+and polls MUXOUT for lock. All planning is delegated to `adf4351.plan()` and the
+`ADF4351` device class, so the registers it prints are exactly the ones it writes.
 
 ```sh
-python test_freq.py 1000                 # set 1000 MHz, write, check lock
-python test_freq.py 2450.1               # exact at a 25 MHz PFD -> best phase noise
-python test_freq.py 2450.001             # needs a finer step -> PFD drops
-python test_freq.py 1000 --dry-run       # compute and print only, write nothing
-python test_freq.py 4000 --resolution 50 # allow a coarse step, keep the PFD high
-python test_freq.py 1000 --ref-freq 10   # board has a 10 MHz reference
+python test_frequency.py 1000                 # set 1000 MHz, write, check lock
+python test_frequency.py 2450.1               # exact at a 25 MHz PFD -> best phase noise
+python test_frequency.py 2450.001             # needs a finer step -> PFD drops
+python test_frequency.py 1000 --dry-run       # compute and print only, write nothing
+python test_frequency.py 4000 --resolution 50 # allow a coarse step, keep the PFD high
+python test_frequency.py 1000 --ref-freq 10   # board has a 10 MHz reference
+python test_frequency.py 1000 --doubler       # double the reference before the R counter
+python test_frequency.py 1000 --div2          # halve the reference before the R counter
 ```
 
 ## How the frequency plan is chosen
